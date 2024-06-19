@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/recipes")
@@ -30,7 +30,7 @@ public class RecipeController {
         return new AddRecipeDTO();
     }
     @GetMapping("/recipe-add")
-    String addRecipe(){
+    public String addRecipe(){
         if (!loggedUser.isLogged()) {
             return "redirect:/users/login";
         }
@@ -38,7 +38,7 @@ public class RecipeController {
     }
 
     @PostMapping("/recipe-add")
-    String addRecipe(@Valid AddRecipeDTO data,
+    public String addRecipe(@Valid AddRecipeDTO data,
                      BindingResult bindingResult,
                      RedirectAttributes redirectAttributes){
         if (!loggedUser.isLogged()) {

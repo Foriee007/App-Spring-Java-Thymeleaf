@@ -1,5 +1,6 @@
 package com.bonappetit.model.dto;
-
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 public class UserDTO {
     private Long id;
     private String username;

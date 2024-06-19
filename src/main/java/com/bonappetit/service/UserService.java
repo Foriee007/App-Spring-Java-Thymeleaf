@@ -1,10 +1,13 @@
 package com.bonappetit.service;
 
+import com.bonappetit.model.dto.RecipeInfoDTO;
 import com.bonappetit.model.dto.RegisterDTO;
 import com.bonappetit.model.dto.UserDTO;
 import com.bonappetit.model.entity.User;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface UserService {
 
@@ -14,6 +17,7 @@ public interface UserService {
     boolean register(RegisterDTO registerDTO);
 
     void logout();
+    Set<RecipeInfoDTO> findFavourites(Long userId);
 
     UserDTO findUserByUsername(String username);
 

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/users")
@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    String login(Model model){
+    public String login(Model model){
         if (this.loggedUser.isLogged()) {
             return "redirect:/home";
         }
@@ -41,7 +41,7 @@ public class UserController {
 
 
     @PostMapping("/login")
-    String loginConfirm(@Valid LoginDTO loginDTO,
+    public String loginConfirm(@Valid LoginDTO loginDTO,
                         BindingResult bindingResult,
                         RedirectAttributes redirectAttributes){
         if (this.loggedUser.isLogged()) {
@@ -68,7 +68,7 @@ public class UserController {
         return new RegisterDTO();
 }
     @GetMapping("/register")
-    String register(){
+    public String register(){
         if (this.loggedUser.isLogged()) {
             return "redirect:/home";
         }
@@ -76,7 +76,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    String registerConfirm(@Valid RegisterDTO registerDTO,
+    public String registerConfirm(@Valid RegisterDTO registerDTO,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes){
         if (this.loggedUser.isLogged()) {
@@ -93,11 +93,11 @@ public class UserController {
         if (!success) {
             return "redirect:/users/register";
         }
-        return "redirect:/login";
+        return "redirect:/users/login";
     }
 
     @GetMapping("/logout")
-    String logout(){
+    public String logout(){
         if (!this.loggedUser.isLogged()) {
             return "redirect:/users/login";
         }
@@ -105,7 +105,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @ModelAttribute("validCredentials")
+    @ModelAttribute()
     public void addAttribute(Model model) {
         model.addAttribute("validCredentials");
     }

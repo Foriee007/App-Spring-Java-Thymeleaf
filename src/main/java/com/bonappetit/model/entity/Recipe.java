@@ -5,13 +5,13 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "recipes")
 public class Recipe extends BaseEntity{
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String name;
 
-    @Column(columnDefinition = "TEXT")
+    //@Column(columnDefinition = "TEXT")
     private String ingredients;
 
-    @ManyToOne(fetch = FetchType.EAGER)//(optional = false)Bankin
+    @ManyToOne(optional = false)//(optional = false)Bankin
     private Category category;
 
     @ManyToOne(fetch = FetchType.EAGER)//(optional = false)Bankin

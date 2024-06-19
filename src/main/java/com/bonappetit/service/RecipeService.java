@@ -10,4 +10,5 @@ public interface RecipeService {
     List<Recipe> mainDish();
     List<Recipe> desert();
     List<Recipe> cocktail();
+    void addToFavourites(Long id, long recipeId);
 }

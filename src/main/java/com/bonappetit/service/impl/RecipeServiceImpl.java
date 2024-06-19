@@ -13,11 +13,10 @@ import com.bonappetit.service.RecipeService;
 import com.bonappetit.service.UserService;
 import com.bonappetit.util.LoggedUser;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
@@ -37,9 +36,8 @@ public class RecipeServiceImpl implements RecipeService {
         this.loggedUser = loggedUser;
     }
 
-
     @Override
-    public boolean collectRecipe(AddRecipeDTO addRecipeDTO) {
+    public boolean collectRecipe(AddRecipeDTO data) {
         if (!loggedUser.isLogged()) {
             return false;
         }
@@ -47,15 +45,13 @@ public class RecipeServiceImpl implements RecipeService {
         if (userById.isEmpty()) {
             return false;
         }
-        Optional<Category> byName = categoryRepository.findByName(addRecipeDTO.getCategory());
+        Optional<Category> byName = categoryRepository.findByName(data.getCategory());
         if (byName.isEmpty()) {
             return false;
         }
-
-
                 Recipe recipe = new Recipe();
-                recipe.setName(addRecipeDTO.getName());
-                recipe.setIngredients(addRecipeDTO.getIngredients());
+                recipe.setName(data.getName());
+                recipe.setIngredients(data.getIngredients());
                 recipe.setCategory(byName.get());
                 recipe.setAddedBy(userById.get());
 
@@ -71,6 +67,21 @@ public class RecipeServiceImpl implements RecipeService {
     }
     public List<Recipe> cocktail() {
         return this.recipeRepository.findAllByCategory_Name(CategoryEnum.COCKTAIL);
+    }
+
+    @Override
+    @Transactional
+    public void addToFavourites(Long id, long recipeId) {
+        Optional<User> userOpt = userRepository.findById(id);
+        if (userOpt.isEmpty()) {
+            return;
+        }
+        Optional<Recipe> recipeOpt = recipeRepository.findById(recipeId);
+        if (recipeOpt.isEmpty()) {
+            return;
+        }
+        userOpt.get().addFavourite(recipeOpt.get());
+        userRepository.save(userOpt.get());
     }
 
 }

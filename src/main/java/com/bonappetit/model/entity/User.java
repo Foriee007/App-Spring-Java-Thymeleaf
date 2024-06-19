@@ -1,8 +1,9 @@
 package com.bonappetit.model.entity;
 
+
+
 import jakarta.persistence.*;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,7 +19,7 @@ public class User extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "addedBy")
+    @OneToMany(mappedBy = "addedBy")
     private Set<Recipe> addedRecipes;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -67,5 +68,8 @@ public class User extends BaseEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    public void addFavourite(Recipe recipe) {
+        this.favouriteRecipes.add(recipe);
     }
 }
