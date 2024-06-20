@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -50,11 +51,11 @@ public class HomeController {
         List<Recipe> allMainDish = recipeService.mainDish();
         List<Recipe> allCocktail = recipeService.cocktail();
         List<Recipe> allDesert = recipeService.desert();
-        List<RecipeInfoDTO> favourites =
-                userService.findFavourites(loggedUser.getId())
-                        .stream()
-                        .map((RecipeInfoDTO id) -> new RecipeInfoDTO())
-                        .toList();
+        List<Recipe> favourites = new ArrayList<>(userService.getFavorite(loggedUser.getId()));
+//                userService.findFavourites(loggedUser.getId())
+//                        .stream()
+//                        .map((RecipeInfoDTO id) -> new RecipeInfoDTO())
+//                        .toList();
 
         model.addAttribute("allMainDish", allMainDish);
         model.addAttribute("allDesert", allDesert);
@@ -72,7 +73,6 @@ public class HomeController {
         if (!loggedUser.isLogged()) {
             return "redirect:/";
         }
-
         recipeService.addToFavourites(loggedUser.getId(), recipeId);
 
         return "redirect:/home";

@@ -1,9 +1,10 @@
 package com.bonappetit.service.impl;
 
-import com.bonappetit.model.dto.RecipeInfoDTO;
 import com.bonappetit.model.dto.RegisterDTO;
 import com.bonappetit.model.dto.UserDTO;
+import com.bonappetit.model.entity.Recipe;
 import com.bonappetit.model.entity.User;
+import com.bonappetit.repo.RecipeRepository;
 import com.bonappetit.repo.UserRepository;
 import com.bonappetit.service.UserService;
 import com.bonappetit.util.LoggedUser;
@@ -12,23 +13,18 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final PasswordEncoder encoder;
     private final LoggedUser loggedUser;
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
 
-    public UserServiceImpl(PasswordEncoder encoder, LoggedUser loggedUser, UserRepository userRepository, ModelMapper modelMapper) {
+    public UserServiceImpl(PasswordEncoder encoder, LoggedUser loggedUser, UserRepository userRepository) {
         this.encoder = encoder;
         this.loggedUser = loggedUser;
         this.userRepository = userRepository;
-        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -37,6 +33,7 @@ public class UserServiceImpl implements UserService {
         this.loggedUser.setId(user.getId());
         this.loggedUser.setUsername(user.getUsername());
     }
+
     public User getUserByUsername(String username) { //check for Username
         return this.userRepository.findByUsername(username).orElse(null);
     }
@@ -108,15 +105,23 @@ public class UserServiceImpl implements UserService {
         return userDto;
     }
 
-
     @Override
     @Transactional
-    public Set<RecipeInfoDTO> findFavourites(Long userId) {
-        return userRepository.findById(userId)
-                .orElseThrow()
-                .getFavouriteRecipes()
-                .stream().map(e -> modelMapper.map(e, RecipeInfoDTO.class))
-                .collect(Collectors.toSet());
+    public Collection<Recipe> getFavorite(long userId) {
+        Optional<User> byId = userRepository.findById(userId);
+        if (byId.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return byId.get().getFavouriteRecipes();
     }
+    //    @Override // OLD Method save it for reference
+    //    @Transactional
+    //    public Set<RecipeInfoDTO> findFavourites(Long userId) {
+    //        return userRepository.findById(userId)
+    //                .orElseThrow()
+    //                .getFavouriteRecipes()
+    //                .stream().map(e -> modelMapper.map(e, RecipeInfoDTO.class))
+    //                .collect(Collectors.toSet());}
+
 }
 

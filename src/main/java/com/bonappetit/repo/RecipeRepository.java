@@ -11,4 +11,5 @@ import java.util.Set;
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     Set<Recipe> findAllByCategory(Category category);
     List<Recipe> findAllByCategory_Name(CategoryEnum categoryEnum);
+    //List<Recipe> findAllByAddedBy_FavouriteRecipes(Set<Recipe> addedBy_favouriteRecipes);
 }

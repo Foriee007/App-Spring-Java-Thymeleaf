@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface RecipeService {
     boolean collectRecipe(AddRecipeDTO addRecipeDTO);
+
     List<Recipe> mainDish();
+
     List<Recipe> desert();
+
     List<Recipe> cocktail();
+
     void addToFavourites(Long id, long recipeId);
 }

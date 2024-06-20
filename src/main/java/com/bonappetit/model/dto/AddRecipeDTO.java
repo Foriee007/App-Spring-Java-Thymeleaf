@@ -8,11 +8,11 @@ import jakarta.validation.constraints.Size;
 public class AddRecipeDTO {
 
     @NotNull
-    @Size(min = 2, max = 40)
+    @Size(min = 2, max = 40, message = "The recipe's name length must be between 2 and 40 characters!")
     private String name;
 
     @NotNull
-    @Size(min = 2, max = 150)
+    @Size(min = 2, max = 150, message = "The ingredients length must be between 2 and 150 characters!")
     private String ingredients;
 
     @NotNull
@@ -30,7 +30,7 @@ public class AddRecipeDTO {
         return this;
     }
 
-    public  String getIngredients() {
+    public String getIngredients() {
         return ingredients;
     }
 

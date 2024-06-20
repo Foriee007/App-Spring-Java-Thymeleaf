@@ -49,29 +49,31 @@ public class RecipeServiceImpl implements RecipeService {
         if (byName.isEmpty()) {
             return false;
         }
-                Recipe recipe = new Recipe();
-                recipe.setName(data.getName());
-                recipe.setIngredients(data.getIngredients());
-                recipe.setCategory(byName.get());
-                recipe.setAddedBy(userById.get());
+        Recipe recipe = new Recipe();
+        recipe.setName(data.getName());
+        recipe.setIngredients(data.getIngredients());
+        recipe.setCategory(byName.get());
+        recipe.setAddedBy(userById.get());
 
-                this.recipeRepository.save(recipe);
+        this.recipeRepository.save(recipe);
         return true;
     }
 
     public List<Recipe> mainDish() {
-        return this.recipeRepository.findAllByCategory_Name(CategoryEnum.MAIN_DISH );
+        return this.recipeRepository.findAllByCategory_Name(CategoryEnum.MAIN_DISH);
     }
+
     public List<Recipe> desert() {
-        return this.recipeRepository.findAllByCategory_Name(CategoryEnum.DESSERT );
+        return this.recipeRepository.findAllByCategory_Name(CategoryEnum.DESSERT);
     }
+
     public List<Recipe> cocktail() {
         return this.recipeRepository.findAllByCategory_Name(CategoryEnum.COCKTAIL);
     }
 
     @Override
     @Transactional
-    public void addToFavourites(Long id, long recipeId) {
+    public void addToFavourites(Long id, long recipeId) { //From Home Controller
         Optional<User> userOpt = userRepository.findById(id);
         if (userOpt.isEmpty()) {
             return;
