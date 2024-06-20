@@ -12,5 +12,7 @@ Follow in the implementation:
    ![App_AddRecipe](https://github.com/Foriee007/App-Spring-Java-Thymeleaf/assets/24276867/b311a8b8-c37f-4ff3-8719-ed8014803de0)
 7. Home Page (with recipes)
 ![App_Manu](https://github.com/Foriee007/App-Spring-Java-Thymeleaf/assets/24276867/49338954-1567-4acd-969c-10602cf2fbf9)
+
+
 8.The application should provide Users (logged in) or Guest(to register) with the functionality to log out, add a new recipe (Add Recipe page), view all recipes (Home page) and add recipes to Favourites section.
 POM.xml have spring-boot-starter-parent <version>3.3.0 which use jakarta.persistence.* api
