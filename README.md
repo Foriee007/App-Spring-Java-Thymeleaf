@@ -16,3 +16,6 @@ Follow in the implementation:
 
 8.The application should provide Users (logged in) or Guest(to register) with the functionality to log out, add a new recipe (Add Recipe page), view all recipes (Home page) and add recipes to Favourites section.
 POM.xml have spring-boot-starter-parent <version>3.3.0 which use jakarta.persistence.* api
+![App_SpringBoot](https://github.com/Foriee007/App-Spring-Java-Thymeleaf/assets/24276867/591f2613-b388-4bf2-a512-6773419ec910)
+
+
