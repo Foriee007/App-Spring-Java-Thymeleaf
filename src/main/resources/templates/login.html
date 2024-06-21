@@ -15,26 +15,25 @@
         <!--    Example: Render errors messages with fields.errors - you can make it differently. -->
         <!--    <div th:each="error: ${#fields.errors()}" th:text="${error}" class="text-danger">Error messages</div>-->
 
-        <div th:each="error: ${#fields.errors()}" th:text="${error}" class="text-danger">Error messages</div>
+        <div th:each="error: ${#fields.detailedErrors()}" class="text-danger">
+        <span th:text="${error.getFieldName()}"></span>
+            <span th:text="${error.getMessage()}"></span></div>
         <div th:if="${validCredentials == false}" class="text-danger">Incorrect username or password!</div>
+
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
                 <label for="username" class="h3 mb-2">Username</label>
             </div>
-            <input type="text"
-                   class="form-control"
-                   id="username"
-                   name="username"
-            th:field="*{username}"
-            />
+            <input th:field="*{username}"
+                   th:errorclass="bg-danger" type="text" class="form-control" id="username" name="username"/>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
                 <label for="password" class="h3 mb-2">Password</label>
             </div>
-            <input type="password" class="form-control" id="password" name="password"/>
+            <input th:errorclass="bg-danger" type="password" class="form-control" id="password" name="password"/>
         </div>
 
         <div class="button-holder d-flex justify-content-center">

@@ -52,7 +52,9 @@ public class HomeController {
         List<Recipe> allCocktail = recipeService.cocktail();
         List<Recipe> allDesert = recipeService.desert();
         List<Recipe> favourites = new ArrayList<>(userService.getFavorite(loggedUser.getId()));
-//                userService.findFavourites(loggedUser.getId())
+
+        //If FetchType.EAGER not used(Recommended ) we need to create DTO to add favorites
+//     List<RecipeInfoDTO> favourites = userService.findFavourites(loggedUser.getId())
 //                        .stream()
 //                        .map((RecipeInfoDTO id) -> new RecipeInfoDTO())
 //                        .toList();

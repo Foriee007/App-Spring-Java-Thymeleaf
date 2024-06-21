@@ -23,9 +23,12 @@
                     id="name"
                     name="name"
                     th:field="*{name}"
-                    th:errorclass="'is-invalid alert-danger'"
-            ></textarea>
-            <small class="invalid-feedback text-danger">Name error message</small>
+                    th:errorclass="'is-invalid alert-danger'"></textarea>
+            <small th:each="error: ${#fields.errors('name')}"
+                   th:text="${error}"
+                   class="invalid-feedback text-danger">
+                Recipe name error message</small>
+            <!--<small class="invalid-feedback text-danger">Username error message</small>-->
         </div>
 
         <div class="form-group">
@@ -37,9 +40,12 @@
                       id="ingredients"
                       name="ingredients"
                       th:field="*{ingredients}"
-                      th:errorclass="'is-invalid alert-danger'"
-            ></textarea>
-            <small class="invalid-feedback text-danger">Ingredients error message</small>
+                      th:errorclass="'is-invalid alert-danger'"></textarea>
+            <small th:each="error: ${#fields.errors('ingredients')}"
+                   th:text="${error}"
+                   class="invalid-feedback text-danger">
+                Ingredients error message</small>
+<!--            <small class="invalid-feedback text-danger">Ingredients error message</small>-->
         </div>
 
         <div class="form-group">
@@ -56,8 +62,11 @@
                 <option value="DESSERT">Dessert</option>
                 <option value="COCKTAIL">Cocktail</option>
             </select>
-
-            <small class="invalid-feedback text-danger">Category error message</small>
+            <small th:each="error: ${#fields.errors('category')}"
+                   th:text="${error}"
+                   class="invalid-feedback text-danger">
+                Categories error message</small>
+<!--            <small class="invalid-feedback text-danger">Category error message</small>-->
         </div>
 
         <div class="button-holder d-flex justify-content-center">

@@ -48,7 +48,7 @@ public class UserController {
             return "redirect:/home";
         }
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("loginDta", loginDTO);
+            redirectAttributes.addFlashAttribute("loginData", loginDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginData", bindingResult);
             return "redirect:/users/login";
         }

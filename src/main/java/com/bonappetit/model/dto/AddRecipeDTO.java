@@ -15,7 +15,7 @@ public class AddRecipeDTO {
     @Size(min = 2, max = 150, message = "The ingredients length must be between 2 and 150 characters!")
     private String ingredients;
 
-    @NotNull
+    @NotNull(message = "You must select a category!")
     private CategoryEnum category;
 
     public AddRecipeDTO() {

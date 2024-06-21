@@ -18,7 +18,7 @@ public class User extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "addedBy")
+    @OneToMany(mappedBy = "addedBy") // ToMany->Default FetchType.LAZY
     private Set<Recipe> addedRecipes;
 
     @ManyToMany(fetch = FetchType.EAGER)

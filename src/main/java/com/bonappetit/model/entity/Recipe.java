@@ -14,7 +14,7 @@ public class Recipe extends BaseEntity{
     @ManyToOne(optional = false)//(optional = false)Bankin
     private Category category;
 
-    @ManyToOne(fetch = FetchType.EAGER)//(optional = false)Bankin
+    @ManyToOne(fetch = FetchType.EAGER)//(optional = false)Bankin /(ToOne->Default FetchType.EAGER)
     private User addedBy;
 
     public Recipe() {
